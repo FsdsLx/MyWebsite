@@ -7,8 +7,9 @@
 
 const original = hexo.extend.generator.store['index'];
 
-hexo.extend.generator.register('index', function (locals) {
-  const pages = original ? original.call(this, locals) : [];
+hexo.extend.generator.register('index', async function (locals) {
+  // 原生成器被 Hexo 包装成返回 Promise，必须 await 才能拿到页面数组
+  const pages = original ? await original.call(this, locals) : [];
 
   if (pages && pages.length) return pages;
 
