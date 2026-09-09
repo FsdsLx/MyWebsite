@@ -1,0 +1,31 @@
+<%
+  var here = (page.path || '').replace(/^\/+|\/+$/g, '');
+  var pageIdx = here.replace(/\/?index\.html?$/, '');
+  var isHomeP = (pageIdx === '' || /^page\/\d+$/.test(pageIdx));
+  var ttl = config.title;
+  var dsc = '';
+
+  if (isHomeP) {
+    ttl = config.subtitle ? config.title + ' · ' + config.subtitle : config.title;
+    dsc = config.description || config.subtitle || '';
+  } else if (page.category) {
+    ttl = page.category + ' · ' + config.title;
+  } else if (page.tag) {
+    ttl = page.tag + ' · ' + config.title;
+  } else if (/^archives(\/|$)/.test(pageIdx)) {
+    ttl = '归档 · ' + config.title;
+  } else if (page.title) {
+    ttl = page.title + ' · ' + config.title;
+    dsc = page.description || (page.excerpt ? strip_html(page.excerpt).slice(0, 160) : '');
+  }
+%>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#002FA7">
+  <meta name="color-scheme" content="light">
+  <title><%= ttl %></title>
+  <% if (dsc) { %><meta name="description" content="<%= strip_html(dsc).trim() %>"><% } %>
+  <link rel="icon" type="image/svg+xml" href="<%- url_for('/favicon.svg') %>">
+  <%- css('css/style') %>
+</head>

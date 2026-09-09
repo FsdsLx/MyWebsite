@@ -1,0 +1,26 @@
+<section class="masthead">
+  <div class="mast-grid">
+    <h1 class="mast-title"><%= config.title %></h1>
+    <div class="mast-side">
+      <p class="kicker">FSDSLX · COMPUTING NOTES</p>
+      <% if (config.subtitle) { %><p class="mast-sub"><%= config.subtitle %></p><% } %>
+      <% if (theme.note) { %><p class="mast-note"><%= theme.note %></p><% } %>
+      <p class="mast-stat"><%= site.posts.length %> 篇文章<% if (theme.copyright_start) { %> · 建站于 <%= theme.copyright_start %><% } %></p>
+    </div>
+  </div>
+</section>
+
+<section class="list-wrap" aria-label="文章列表">
+  <div class="list-head" aria-hidden="true">
+    <span>日期</span><span>标题</span><span>标签</span>
+  </div>
+  <div class="list">
+    <% if (!page.posts.length) { %>
+      <p class="empty">还没有文章，稍后再来看看。</p>
+    <% } %>
+    <% page.posts.each(function(post){ %>
+      <%- partial('_partial/entry', { post: post, dateFormat: 'YYYY.MM.DD' }) %>
+    <% }); %>
+  </div>
+  <%- partial('_partial/pagination') %>
+</section>

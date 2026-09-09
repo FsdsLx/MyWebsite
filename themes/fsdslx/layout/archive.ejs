@@ -1,0 +1,21 @@
+<section class="page-head">
+  <p class="kicker">ARCHIVE</p>
+  <h1 class="page-title">归档</h1>
+  <p class="page-lead">共 <%= site.posts.length %> 篇文章，按年份归档。</p>
+</section>
+
+<section class="list-wrap" aria-label="文章归档">
+  <div class="list">
+    <% if (!page.posts.length) { %>
+      <p class="empty">这里空空如也。</p>
+    <% } %>
+    <% var year = 0; %>
+    <% page.posts.each(function(post){ %>
+      <% var ny = date(post.date, 'YYYY'); if (ny !== year) { year = ny; %>
+        <div class="year-head"><%= year %></div>
+      <% } %>
+      <%- partial('_partial/entry', { post: post, dateFormat: 'MM.DD' }) %>
+    <% }); %>
+  </div>
+  <%- partial('_partial/pagination') %>
+</section>

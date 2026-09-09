@@ -1,0 +1,19 @@
+<section class="page-head">
+  <p class="kicker">TAG</p>
+  <h1 class="page-title"><%= page.tag %></h1>
+</section>
+
+<section class="list-wrap" aria-label="标签文章">
+  <div class="list-head" aria-hidden="true">
+    <span>日期</span><span>标题</span><span>标签</span>
+  </div>
+  <div class="list">
+    <% if (!page.posts.length) { %>
+      <p class="empty">该标签下暂无文章。</p>
+    <% } %>
+    <% page.posts.each(function(post){ %>
+      <%- partial('_partial/entry', { post: post, dateFormat: 'YYYY.MM.DD' }) %>
+    <% }); %>
+  </div>
+  <%- partial('_partial/pagination') %>
+</section>

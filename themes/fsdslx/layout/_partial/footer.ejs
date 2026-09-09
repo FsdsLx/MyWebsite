@@ -1,0 +1,11 @@
+<%
+  var start = theme.copyright_start || new Date().getFullYear();
+  var now = new Date().getFullYear();
+  var years = (now > start) ? start + '–' + now : String(now);
+%>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p class="footer-left">© <%= years %> <%= config.title %><% if (config.subtitle) { %> · <%= config.subtitle %><% } %></p>
+    <p class="footer-right"><a href="#top">返回顶部 ↑</a></p>
+  </div>
+</footer>

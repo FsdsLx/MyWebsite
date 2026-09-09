@@ -1,0 +1,19 @@
+<section class="page-head">
+  <p class="kicker">CATEGORY</p>
+  <h1 class="page-title"><%= page.category %></h1>
+</section>
+
+<section class="list-wrap" aria-label="分类文章">
+  <div class="list-head" aria-hidden="true">
+    <span>日期</span><span>标题</span><span>标签</span>
+  </div>
+  <div class="list">
+    <% if (!page.posts.length) { %>
+      <p class="empty">该分类下暂无文章。</p>
+    <% } %>
+    <% page.posts.each(function(post){ %>
+      <%- partial('_partial/entry', { post: post, dateFormat: 'YYYY.MM.DD' }) %>
+    <% }); %>
+  </div>
+  <%- partial('_partial/pagination') %>
+</section>

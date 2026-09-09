@@ -1,0 +1,15 @@
+<% if (page.total && page.total > 1) { %>
+<nav class="pg" aria-label="分页导航">
+  <% if (page.prev) { %>
+    <a class="pg-item pg-prev" href="<%- url_for(page.prev_link) %>">← 上一页</a>
+  <% } else { %>
+    <span class="pg-item pg-prev off"></span>
+  <% } %>
+  <span class="pg-pos">第 <%= page.current %> / <%= page.total %> 页</span>
+  <% if (page.next) { %>
+    <a class="pg-item pg-next" href="<%- url_for(page.next_link) %>">下一页 →</a>
+  <% } else { %>
+    <span class="pg-item pg-next off"></span>
+  <% } %>
+</nav>
+<% } %>

@@ -1,0 +1,14 @@
+.DS_Store
+Thumbs.db
+db.json
+*.log
+node_modules/
+public/
+.deploy*/
+_multiconfig.yml
+
+# pnpm 试验产物（实际使用 npm，以 package-lock.json 为准）
+pnpm-lock.yaml
+pnpm-workspace.yaml
+# 本地工具目录
+.zcode/

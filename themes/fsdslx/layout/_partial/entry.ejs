@@ -1,0 +1,11 @@
+<article class="row">
+  <div class="row-date">
+    <time datetime="<%= date_xml(post.date) %>"><%= date(post.date, dateFormat) %></time>
+  </div>
+  <h2 class="row-title"><a href="<%- url_for(post.path) %>"><%= post.title %></a></h2>
+  <div class="row-tags">
+    <% if (post.tags && post.tags.length) { post.tags.each(function(t){ %>
+      <a class="tag-chip" href="<%- url_for(t.path) %>"><%= t.name %></a>
+    <% }); } %>
+  </div>
+</article>

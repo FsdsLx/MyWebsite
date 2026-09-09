@@ -1,0 +1,28 @@
+<%
+  var here = (page.path || '').replace(/^\/+|\/+$/g, '');
+  var pageIdx = here.replace(/\/?index\.html?$/, '');
+  var isHomeP = (pageIdx === '' || /^page\/\d+$/.test(pageIdx));
+  function navOn(label, tpath) {
+    var isPostP = /^\d{4}\/\d{2}\/\d{2}\//.test(pageIdx);
+    if (label === '文章' || tpath === '') return isHomeP || isPostP;
+    if (isHomeP) return false;
+    return tpath !== '' && (pageIdx === tpath || pageIdx.indexOf(tpath + '/') === 0);
+  }
+%>
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="wordmark" href="<%- url_for('/') %>"><%= config.title %></a>
+    <nav class="site-nav" aria-label="主导航">
+      <ul>
+        <% for (var label in theme.menu) {
+          var target = theme.menu[label];
+          var tpath = target.replace(/^\/+|\/+$/g, '');
+        %>
+        <li>
+          <a class="nav-link<%= navOn(label, tpath) ? ' on' : '' %>" href="<%- url_for(target) %>"><%= label %></a>
+        </li>
+        <% } %>
+      </ul>
+    </nav>
+  </div>
+</header>

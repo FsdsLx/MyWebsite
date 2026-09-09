@@ -1,0 +1,48 @@
+<article class="post">
+  <header class="post-head">
+    <div class="post-meta">
+      <time class="post-date" datetime="<%= date_xml(page.date) %>"><%= date(page.date, 'YYYY.MM.DD') %></time>
+      <% if (page.categories && page.categories.length) { %>
+      <p class="post-cats"><span class="lbl">分类</span>
+        <% var catN = 0; page.categories.each(function(c){ catN++; %>
+          <% if (catN > 1) { %>/ <% } %><a href="<%- url_for(c.path) %>"><%= c.name %></a>
+        <% }); %>
+      </p>
+      <% } %>
+    </div>
+    <h1 class="post-title"><%= page.title %></h1>
+  </header>
+
+  <div class="prose">
+    <%- page.content %>
+  </div>
+
+  <footer class="post-foot">
+    <% if (page.tags && page.tags.length) { %>
+    <p class="post-tags"><span class="lbl">标签</span>
+      <% page.tags.each(function(t){ %>
+        <a class="tag-chip" href="<%- url_for(t.path) %>"><%= t.name %></a>
+      <% }); %>
+    </p>
+    <% } %>
+
+    <nav class="post-pager" aria-label="上一篇/下一篇">
+      <% if (page.prev) { %>
+      <a class="pager prev" href="<%- url_for(page.prev.path) %>">
+        <span class="pager-lbl">← 上一篇</span>
+        <span class="pager-title"><%= page.prev.title %></span>
+      </a>
+      <% } else { %>
+      <span class="pager empty"></span>
+      <% } %>
+      <% if (page.next) { %>
+      <a class="pager next" href="<%- url_for(page.next.path) %>">
+        <span class="pager-lbl">下一篇 →</span>
+        <span class="pager-title"><%= page.next.title %></span>
+      </a>
+      <% } else { %>
+      <span class="pager empty"></span>
+      <% } %>
+    </nav>
+  </footer>
+</article>
