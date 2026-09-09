@@ -19,7 +19,8 @@ timezone: Asia/Shanghai
 ## TODO(GitHub Pages): 发布前把这里改成你的真实地址。
 ## 用户站（仓库名 <username>.github.io）用 https://<username>.github.io/
 ## 项目站（其它仓库名）用 https://<username>.github.io/<repo>/ 并同步设置 root
-url: https://FsdsLx.github.io/
+url: https://fsdslx.github.io/MyWebsite/
+root: /MyWebsite/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
