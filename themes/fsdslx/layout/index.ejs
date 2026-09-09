@@ -15,12 +15,13 @@
     <span>日期</span><span>标题</span><span>标签</span>
   </div>
   <div class="list">
-    <% if (!page.posts.length) { %>
-      <p class="empty">还没有文章，稍后再来看看。</p>
+    <% if (page.posts.length) { %>
+      <% page.posts.each(function(post){ %>
+        <%- partial('_partial/entry', { post: post, dateFormat: 'YYYY.MM.DD' }) %>
+      <% }); %>
+    <% } else { %>
+      <p class="empty">还没有文章，第一篇正在路上。写好后执行 <code>hexo new "标题"</code> 并重新生成即可在这里看到。</p>
     <% } %>
-    <% page.posts.each(function(post){ %>
-      <%- partial('_partial/entry', { post: post, dateFormat: 'YYYY.MM.DD' }) %>
-    <% }); %>
   </div>
   <%- partial('_partial/pagination') %>
 </section>

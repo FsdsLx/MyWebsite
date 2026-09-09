@@ -275,6 +275,15 @@ h1, h2, h3, h4, p { margin: 0; }
   border-bottom: 1px solid var(--line-soft);
 }
 
+.empty code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+  background: var(--block-bg);
+  border: 1px solid #e6e6e1;
+  padding: 0.05em 0.35em;
+  word-break: break-all;
+}
+
 /* ---------- 标签 chip ---------- */
 
 .tag-chip {
