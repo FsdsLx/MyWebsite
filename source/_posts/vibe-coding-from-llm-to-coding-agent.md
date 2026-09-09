@@ -58,7 +58,7 @@ Taste 的养成没有捷径：**大量阅读好代码 + 亲手 review 每一处 
 
 每个 token 被映射成一串数字（向量），**语义越相近，向量在空间里的位置越靠近**。
 
-![image-20260909082230604](https://gitee.com/defensive-leader/picgo-bed/raw/master/20260909082237704.png)
+{% asset_img 20260909082237704.png %}
 
 - 示例：猫 → [0.21, -0.58, 0.83, …]；狗 → [0.19, -0.61, 0.79, …]；编译器 → [-0.72, 0.34, 0.11, …]。"猫"和"狗"的向量很接近，"编译器"离它们很远。
 - 经典运算：**国王 − 男人 + 女人 ≈ 女王**——把「国王−男人」得到的"王室"方向加到「女人」上，落点正好是「女王」。
@@ -68,7 +68,7 @@ Taste 的养成没有捷径：**大量阅读好代码 + 亲手 review 每一处 
 
 向量序列进入一个叫 Transformer 的神经网络——**它只做一件事：算出下一个 token 的概率分布**。
 
-![image-20260909082315507](https://gitee.com/defensive-leader/picgo-bed/raw/master/20260909082315546.png)
+{% asset_img 20260909082315546.png %}
 
 - 图左列是全链路回放：Token 序列 → Embedding 向量 → Transformer → 下一个 token 的概率（如 线上 42% · 晚上 25% · 今天 15% …）。
 - 图右是 Transformer 块内部（GPT 式简化）：**Self-Attention** 让 token 之间交换信息，**前馈网络 FFN** 在每个位置独立计算；每个向量还会加上**位置信息**，模型由此知道词的先后顺序。
@@ -78,7 +78,7 @@ Taste 的养成没有捷径：**大量阅读好代码 + 亲手 review 每一处 
 
 大模型做的唯一一件事：给定上文，计算所有候选下一个 token 的概率分布，然后**采样**一个，再拼回上文继续。
 
-![image-20260909082344078](https://gitee.com/defensive-leader/picgo-bed/raw/master/20260909082344134.png)
+{% asset_img 20260909082344134.png %}
 
 - Transformer 最后一层给**词表中每一个** token 算出"出现在下一个位置"的概率，全部加起来正好 100%，再按概率抽一个。
 - 词表 = 模型的"全部词汇"，主流模型约 5–15 万个 token，每一个都会分到一点概率（趋近于 0，但都不是 0）。
@@ -92,7 +92,7 @@ Taste 的养成没有捷径：**大量阅读好代码 + 亲手 review 每一处 
 
 每个 token 都拿着自己的 **Query**，去和（自己及之前的）每个 token 的 **Key** 算一次匹配分——分越高，"看"得越仔细。
 
-![image-20260909082359628](https://gitee.com/defensive-leader/picgo-bed/raw/master/20260909082359667.png)
+{% asset_img 20260909082359667.png %}
 
 - 比喻：Key 行是每个 token 亮出"名片"，Query 行是每个 token 发起"提问"。
 - 关键规则：**每个 Query 只与"自己及之前"的 Key 计算（不偷看未来）**；线越粗 = 匹配分越高。
@@ -113,7 +113,7 @@ Taste 的养成没有捷径：**大量阅读好代码 + 亲手 review 每一处 
 
 同一个模型，先靠**预训练**"学知识"，再靠**后训练**"学做事"。
 
-![image-20260909082419767](https://gitee.com/defensive-leader/picgo-bed/raw/master/20260909082419801.png)
+{% asset_img 20260909082419801.png %}
 
 1. **预训练（Pre-training）**：在海量文本上玩亿万次接龙，学会语言与世界知识。产物：只会续写的 Base Model。
 2. **后训练（Post-training）**：把"接龙高手"调教成"助手"的三道工序：
@@ -156,7 +156,7 @@ Taste 的养成没有捷径：**大量阅读好代码 + 亲手 review 每一处 
 
 ### 3.1 从 Chat 到 Agent：多了"一个循环"
 
-![image-20260909082436589](https://gitee.com/defensive-leader/picgo-bed/raw/master/20260909082436622.png)
+{% asset_img 20260909082436622.png %}
 
 - **普通 Chat**：你提问 → 模型生成回答 → 结束。模型没有"手"：不能看你的文件、不能跑命令，你得手动复制粘贴代码和报错，当"人肉中间件"。
 - **Agent**：目标驱动、循环执行：① Observe 观察 → ② Think 规划 → ③ Act 行动 → ④ Check 检查 → ⑤ Iterate 迭代 → 直到任务完成 / 达到上限。
@@ -218,7 +218,7 @@ Observe：14 passed ✓
 
 **Model Context Protocol**：一套开放协议，让 Agent 用统一方式接入外部数据、工具和 prompt 模板。
 
-![image-20260909082452990](https://gitee.com/defensive-leader/picgo-bed/raw/master/20260909082453024.png)
+{% asset_img 20260909082453024.png %}
 
 - MCP 能提供三类东西：**工具**（可执行的操作）、**资源**（可读取的数据）、**prompt 模板**（预置的任务说明）。
 - 价值对比：
@@ -392,7 +392,7 @@ skills/pdf-report/
 
 这就是"生成 → 验证 → review"闭环的实战形态。**循环越快，风险越小，学得越多。**
 
-![image-20260909082514894](https://gitee.com/defensive-leader/picgo-bed/raw/master/20260909082514923.png)
+{% asset_img 20260909082514923.png %}
 
 1. **读结构**：让 AI 讲解相关代码，自己也读一遍；
 2. **小改动**：一次只做一件事，拒绝"顺便重构"；
